@@ -1,5 +1,5 @@
 vim --version
-sudo apt install build-essential python3-dev gcc python-dev cmake3
+sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3
 # in newer then ubuntu 14.04
 # sudo apt install cmake 
 sudo add-apt-repository ppa:jonathonf/vim
