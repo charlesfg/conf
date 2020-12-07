@@ -1,0 +1,4 @@
+export WORKON_HOME=~/Envs
+[[ -s /home/charles/.autojump/etc/profile.d/autojump.sh ]] && source /home/charles/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
