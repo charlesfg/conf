@@ -5,7 +5,8 @@ function link_to_home(){
 }
 
 vim --version
-sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3
+sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3 \
+    python-pip
 # in newer then ubuntu 14.04
 # sudo apt install cmake 
 sudo add-apt-repository ppa:jonathonf/vim
@@ -34,3 +35,5 @@ cd ~/.vim/plugged/YouCompleteMe/
 echo "Setup the default .ycm_extra_conf.py "
 link_to_home .ycm_extra_conf.py
 
+echo "Installing compile db for generating the database"
+pip install compiledb
