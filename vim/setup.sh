@@ -1,5 +1,6 @@
 vim --version
-sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3
+sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3 \
+    python-pip
 # in newer then ubuntu 14.04
 # sudo apt install cmake 
 sudo add-apt-repository ppa:jonathonf/vim
@@ -25,3 +26,6 @@ echo "Install the YCM with support to clang bidings"
 cd ~/.vim/plugged/YouCompleteMe/
 ./install.py --clangd-completer
 
+
+echo "Installing compile db for generating the database"
+pip install compiledb
