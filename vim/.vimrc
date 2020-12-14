@@ -54,6 +54,10 @@ let g:netrw_browse_split=2
 " window size in %
 let g:netrw_winsize = 25
 let g:ctrlp_use_caching = 0
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+"let g:ycm_min_num_of_chars_for_completion=1
+let g:ycm_confirm_extra_conf=0
+"let g:ycm_autoclose_preview_window_after_completion = 1
 
 
 nnoremap <leader><Left> :wincmd h<CR>
@@ -83,4 +87,4 @@ set exrc
 " enforce security avoid some non-deafult .vimrc files
 set secure
 
-
+set t_ut=
