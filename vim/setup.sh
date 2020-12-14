@@ -17,6 +17,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "Copying .vimrc"
 cp -v .vimrc ~/
 
+echo "Creating session dir"
+mkdir -p ~/.vim/session
+
 
 echo "Open vim and install the plugins with 'PlugInstall'"
 read -p "Are you sure? " -n 1 -r
