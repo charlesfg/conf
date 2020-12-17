@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/root/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 source ~/.local_zshrc
 source ~/aliasrc.sh
@@ -47,7 +47,7 @@ export UPDATE_ZSH_DAYS=30
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-[[ -s /home/charles/.autojump/etc/profile.d/autojump.sh ]] && source /home/charles/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -59,6 +59,16 @@ plugins=(git python autojump dirhistory encode64 git-flow pip python)
 
   export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+if [ -d $HOME/.local/bin ];
+then
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+
+if [ "($which most)" ];
+then
+    export MANPAGER=$(which most) 
+fi
 
 source $ZSH/oh-my-zsh.sh
 unsetopt share_history
