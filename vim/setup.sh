@@ -23,6 +23,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "Linking .vimrc"
 link_to_home .vimrc
 
+echo "Creating session dir"
+mkdir -p ~/.vim/session
+
 
 echo "Open vim and install the plugins with 'PlugInstall'"
 read -p "Opening VIM, press any key " -n 1 -r
