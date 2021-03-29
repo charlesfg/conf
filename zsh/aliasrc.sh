@@ -66,6 +66,6 @@ alias restart_sound="pulseaudio -k && sudo alsa force-reload"
 alias expoxum="ssh ubuntu@200.131.6.113 cat /var/tpcv/experiment.cfg"
 alias cfgvm='ssh ubuntu@10.3.4.36'
 #alias cfgvm='ssh ubuntu@10.3.4.11'
-alias xenvm='ssh xen@10.3.2.142'
+alias cfgtest='ssh charles@10.3.2.142'
 alias xendev='ssh charles@10.3.2.56'
 alias gitckp='git commit -a -m "checkpoint $(date)"'

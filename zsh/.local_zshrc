@@ -3,7 +3,7 @@ export WORKON_HOME=~/Envs
 
 ve_cnf=("/usr/local/bin/virtualenvwrapper.sh" \
 "/usr/local/share/python/virtualenvwrapper.sh" \
-"~/.local/bin/virtualenvwrapper.sh")
+"$HOME/.local/bin/virtualenvwrapper.sh")
 
 for i in ${ve_cnf[@]};
 do 
