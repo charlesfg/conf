@@ -1,4 +1,18 @@
+#!/bin/bash
 export WORKON_HOME=~/Envs
+
+ve_cnf=("/usr/local/bin/virtualenvwrapper.sh" \
+"/usr/local/share/python/virtualenvwrapper.sh" \
+"$HOME/.local/bin/virtualenvwrapper.sh")
+
+for i in ${ve_cnf[@]};
+do 
+    if [[ -e $i ]];
+    then
+        source $i
+    fi 
+done
+
 [[ -s /home/charles/.autojump/etc/profile.d/autojump.sh ]] && source /home/charles/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
