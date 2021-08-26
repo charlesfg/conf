@@ -1,3 +1,4 @@
+#!/bin/bash -x
 function link_to_home(){
     local f=$1
     shift

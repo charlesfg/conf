@@ -70,6 +70,14 @@ then
     export MANPAGER=$(which most) 
 fi
 
+if [ "($which vim)" ];
+then
+    export VISUAL=$(which vim)
+    export EDITOR=$(which vim)
+fi
+
+
+
 source $ZSH/oh-my-zsh.sh
 unsetopt share_history
 unsetopt BG_NICE

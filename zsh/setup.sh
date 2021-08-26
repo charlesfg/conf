@@ -1,3 +1,4 @@
+#!/bin/bash -x
 function bkp_home_file(){
     TARGET_FILE=$1
     [ -e ~/${TARGET_FILE} ] && mv -v ~/${TARGET_FILE} ~/${TARGET_FILE}_bkp
