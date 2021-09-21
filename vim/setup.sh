@@ -38,6 +38,3 @@ cd ~/.vim/plugged/YouCompleteMe/
 
 echo "Setup the default .ycm_extra_conf.py "
 link_to_home .ycm_extra_conf.py
-
-echo "Installing compile db for generating the database"
-pip install compiledb
