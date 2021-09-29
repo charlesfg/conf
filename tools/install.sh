@@ -1,4 +1,4 @@
-
+#!/bin/bash -x
 sudo apt-get install -y curl
 
 echo Installing  RipGrep
