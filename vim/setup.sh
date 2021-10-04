@@ -5,9 +5,17 @@ function link_to_home(){
     ln -s $(readlink -f ${f}) ~/${f}
 }
 
+VERSION_OS=$(lsb_release -r -s)
+
+if [[ ${VERSION_OS} == 16.04 ]];
+then 
+    echo ${VERSION_OS}
+    sudo apt install -y  software-properties-common build-essential python3-dev gcc python-dev cmake python-pip
+else
+    sudo apt install -y  software-properties-common build-essential python3-dev gcc python-dev cmake3 python-pip
+fi
+
 vim --version
-sudo apt install software-properties-common build-essential python3-dev gcc python-dev cmake3 \
-    python-pip
 # in newer then ubuntu 14.04
 # sudo apt install cmake 
 sudo add-apt-repository ppa:jonathonf/vim
@@ -33,6 +41,11 @@ read -p "Opening VIM, press any key " -n 1 -r
 vim
 
 echo "Install the YCM with support to clang bidings" 
+if [ ! -d ~/.vim/plugged/YouCompleteMe/third_party/ycmd/third_party/clangd/cache/ ];
+then
+    mkdir -p ~/.vim/plugged/YouCompleteMe/third_party/ycmd/third_party/clangd/cache/
+fi
+cp -v clangd-9.0.0-x86_64-unknown-linux-gnu.tar.bz2 ~/.vim/plugged/YouCompleteMe/third_party/ycmd/third_party/clangd/cache/
 cd ~/.vim/plugged/YouCompleteMe/
 ./install.py --clangd-completer
 
