@@ -19,8 +19,8 @@ vim --version
 # in newer then ubuntu 14.04
 # sudo apt install cmake 
 sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update && sudo apt install vim
-sudo apt install vim ctags vim-doc vim-scripts cscope gnome-icon-theme indent
+sudo apt update && sudo apt install -y vim
+sudo apt install -y  vim ctags vim-doc vim-scripts cscope gnome-icon-theme indent
 vim --version
 
 
