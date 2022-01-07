@@ -27,5 +27,6 @@ git config --global core.editor "vim"
 
 git config --global mergetool.kdiff3NoAuto.cmd "kdiff3 --L1 \"\$MERGED (Base)\" --L2 \"\$MERGED (Local)\" --L3 \"\$MERGED (Remote)\" -o \"\$MERGED\" \"\$BASE\" \"\$LOCAL\" \"\$REMOTE\""
 
-
-
+# Add this is the status on zsh for a repo is taking to much time
+# from https://stackoverflow.com/questions/12765344/oh-my-zsh-slow-but-only-for-certain-git-repo
+# git config --add oh-my-zsh.hide-dirty 1 
