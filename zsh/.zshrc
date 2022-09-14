@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-source ~/.local_zshrc
-source ~/aliasrc.sh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -118,4 +116,5 @@ RPROMPT='%{$fg[yellow]%}%T%{$reset_color%}'
 PROMPT='%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%m%{$fg[white]%}:%{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)
 ${ret_status}%{$reset_color%}'
 
-
+source ~/.local_zshrc
+source ~/aliasrc.sh
