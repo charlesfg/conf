@@ -11,7 +11,9 @@ Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'mbbill/undotree'
 Plug 'kien/ctrlp.vim'
-Plug 'ycm-core/YouCompleteMe', { 'branch': 'legacy-py2'}
+" the branch specification will depend on the machine usage
+"Plug 'ycm-core/YouCompleteMe', { 'branch': 'legacy-py2'}
+Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 " When started as "evim", evim.vim will already have done these settings.
