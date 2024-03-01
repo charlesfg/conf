@@ -26,6 +26,9 @@ set number
 "size of indentation and other parameters
 set sw=2
 set tabstop=4 softtabstop=4
+" backspace problem on mac 
+" check:  https://apple.stackexchange.com/questions/173275/delete-key-doesnt-work-in-vim-on-iterm2/351434#351434
+set backspace=indent,eol,start
 set shiftwidth=4
 set noswapfile
 set nobackup
