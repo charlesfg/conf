@@ -17,6 +17,7 @@ git config --global core.autocrlf input
 git config --global core.preloadindex true
 git config --global core.fscache true
 git config --global gc.auto 256
+git config --global pull.rebase true
 
 
 # Setting cache for credentials
