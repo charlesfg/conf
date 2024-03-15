@@ -20,11 +20,6 @@ confirm() {
 }
 
 
-# The rest of your script goes here
-echo "Your script continues..."
-
-
-
 echo "Searching for GCC version"
 gcc_v=()
 
@@ -68,10 +63,25 @@ sudo update-alternatives --remove-all gcc
 for g in "${gcc_v[@]}"; do
 
     echo "Installing $g version ... "
-    sudo apt-get install -y $g 
+
+    # Extract the version number using parameter substitution
+    v="${g#gcc-}"
+    
+    # Example: use the new variable
+    echo "GCC Version: gcc-${v}, Corresponding G++ Version: g++-${v}"
+
+    sudo apt-get install -y gcc-${v} g++-${v} 
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/${g} $PRIORITY --slave /usr/bin/g++ g++ /usr/bin/${g}
     PRIORITY=$(($PRIORITY-10))
+
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${v} ${PRIORITY} \
+     --slave /usr/bin/g++ g++ /usr/bin/g++-${v} \
+     --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-${v} \
+     --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-${v} \
+     --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib--${v} \
+     --slave /usr/bin/gcov gcov /usr/bin/gcov-${v}
 
 done
 
 sudo update-alternatives --config gcc
+
