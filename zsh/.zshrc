@@ -55,7 +55,7 @@ plugins=(git python autojump dirhistory encode64 git-flow pip python)
 
 # User configuration
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 if [ -d $HOME/.local/bin ];
