@@ -21,6 +21,14 @@ function git_prune(){
 
 }
 
+comp() {
+    # Strip the .c extension to get the base name
+    local base="${1%.c}"
+    
+    # Compile the file with -o option to specify the output executable name
+    gcc -Wall -Werror -g "$1" -o "$base" && ./"$base"
+}
+
 
 # Git 
 alias gitmt="git mergetool -t kdiff3NoAuto"
@@ -70,7 +78,13 @@ alias cfgvm='ssh ubuntu@10.3.4.36'
 alias cfgtest='ssh charles@10.3.2.142'
 alias xen='ssh charles@10.3.2.56'
 alias xen2='ssh xen@10.3.2.61'
-alias xen3='ssh charles@10.3.1.181'
+
+# -cfgxen3.dei.uc.pt com o ip 10.3.2.201
+alias xen3='ssh charles@10.3.2.201'
+# -cfgxen4.dei.uc.pt com o ip 10.3.2.203
+alias xen4='ssh xen@10.3.2.203'
+# -cfgxen5.dei.uc.pt com o ip 10.3.2.220
+alias xen5='ssh xen@10.3.2.220'
 alias gitckp='git commit -a -m "checkpoint $(date)"'
-alias xen4='ssh xen@10.3.3.96'
-alias xen5='ssh xen@10.3.3.3'
+alias cvm='ssh -L 2222:localhost:3333 xen@10.3.2.220 -p 22 -t ssh -L 3333:172.16.0.13:22 xen@192.168.1.20 -p 22 -t ssh root@172.16.0.13'
+alias l1='ssh -L 2222:localhost:3333 xen@10.3.2.220 -p 22 -t ssh xen@192.168.1.20'
