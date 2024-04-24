@@ -1,0 +1,24 @@
+
+
+xen3:
+  hosts:
+    cfgxen3.dei.uc.pt:
+      ansible_user: charles  # Override the ansible_user for xen3 host
+      ansible_python_interpreter: /usr/bin/python
+
+xen4:
+  hosts:
+    cfgxen4.dei.uc.pt:
+      ansible_user: xen
+      ansible_become_pass: cfg@X3n
+
+xen5:
+  hosts:
+    cfgxen5.dei.uc.pt:
+      ansible_user: xen
+
+xenservers:
+  children:
+    xen3:
+    xen4:
+    xen5:
