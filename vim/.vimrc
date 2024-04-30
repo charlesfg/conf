@@ -92,4 +92,3 @@ set exrc
 " enforce security avoid some non-deafult .vimrc files
 set secure
 
-set t_ut=
