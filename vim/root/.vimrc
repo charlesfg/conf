@@ -20,7 +20,8 @@ set smarttab
 set showmatch
 " set colorcolumn=100
 " highlight ColorColumn ctermbg=0 guibg=lightgrey
-colorscheme desert
+colorscheme iceberg
+
 
 "ignore the files in .gitignore
 if executable('rg')
