@@ -1,0 +1,96 @@
+---
+- name: Setup and configure Zsh and Oh My Zsh
+  hosts: all
+  tasks:
+    - name: Install required packages
+      become: true
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - zsh
+        - curl
+        - exa
+        - fd-find
+        - ripgrep
+        - bat
+        - zoxide
+        - fzf
+
+    - name: Create link fd to fdfind in Debian
+      become: true
+      ansible.builtin.file:
+        src: '/usr/bin/fdfind'
+        dest: '/usr/bin/fd'
+        state: link
+      when: ansible_os_family == 'Debian'
+
+    - name: Create link bat to batcat in Debian
+      become: true
+      ansible.builtin.file:
+        src: '/usr/bin/batcat'
+        dest: '/usr/bin/bat'
+        state: link
+      when: ansible_os_family == 'Debian' and ansible_distribution_version is version('23.04', '<')
+
+    - name: Install Oh My Zsh # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
+        depth: 1
+
+    - name: Install zsh-autosuggestions plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        depth: 1
+
+    - name: Install zsh-completions plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-completions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+        depth: 1
+
+    - name: Install zsh-syntax-highlighting plugin # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        depth: 1
+
+    - name: Change user shell to zsh 
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        shell: /bin/zsh
+    
+    - name: Backup home file
+      ansible.builtin.command: mv -v "{{ item_bkp.source }}" "{{ item_bkp.destination }}"
+      vars:
+        item_bkp:
+          source: "{{ item.filename }}"
+          destination: "{{ item.filename }}_bkp"
+      loop:
+        - filename: "{{ ansible_env.HOME }}/.zshrc"
+      ignore_errors: true
+
+    - name: Copy .zshrc to home directory
+      ansible.builtin.file:
+        src: "{{ ansible_env.HOME }}/git/conf/zsh/.zshrc"
+        dest: "{{ ansible_env.HOME }}/.zshrc"
+        mode: 0644
+        state: link
+
+    - name: Copy .local_zshrc to home directory
+      ansible.builtin.copy:
+        remote_src: true
+        src: "{{ ansible_env.HOME }}/git/conf/zsh/.local_zshrc"
+        dest: "{{ ansible_env.HOME }}/.local_zshrc"
+
+    - name: Copy aliasrc.sh to home directory
+      ansible.builtin.file:
+        src: "{{ ansible_env.HOME }}/git/conf/zsh/aliasrc.sh"
+        dest: "{{ ansible_env.HOME }}/aliasrc.sh"
+        mode: 0644
+        state: link
+

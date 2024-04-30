@@ -19,6 +19,10 @@
         - curl
         - byobu
         - autojump
+        - build-essential
+        - manpages-posix-dev
+        - httpie
+        - ripgrep
 
     - name: Loop through package list and ensure installation if they exist
       become: true
@@ -31,6 +35,8 @@
         packages_to_install:  # Define your list of packages here
           - python-dev
           - python3-dev
+          - python-pip
+          - python3-pip
 
     - name: Setup SSH passwordless authentication
       ansible.builtin.copy: 
@@ -55,6 +61,16 @@
       ansible.builtin.file:
         path: ~/git
         state: directory
+    
+    - name: Allow the current  user to sudo without password
+      become: true
+      tags: test
+      community.general.sudoers:
+        name: sudo-passwordless
+        state: present
+        user: "{{ansible_user}}"
+        nopassword: true
+        commands: ALL
 
     - name: Clone repository into ~/git folder
       ansible.builtin.git:

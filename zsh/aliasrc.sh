@@ -92,3 +92,8 @@ alias cvm='ssh xen@10.3.2.220 -t ssh  xen@192.168.1.20 -t ssh root@172.16.0.13'
 alias l1='ssh xen@10.3.2.220 -t ssh xen@192.168.1.20'
 alias sysb='ssh xen@10.3.2.220  -t ssh xen@192.168.1.20  -t ssh xen@172.16.0.14'
 alias sysc='ssh xen@10.3.2.220  -t ssh xen@192.168.1.22'
+
+
+# Utils
+alias topcpu='ps -eo pid,ppid,%cpu,%mem,cmd --sort=-%cpu | head -15'
+alias topmem='ps -eo pid,ppid,%cpu,%mem,cmd --sort=-%mem | head -15'
