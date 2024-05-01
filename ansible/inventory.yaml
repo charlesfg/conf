@@ -1,4 +1,16 @@
+home:
+  hosts:
+    127.0.0.1:
+      ansible_connection: local
+      ansible_user: charlesgoncalves
+      ansible_become_pass: cfg@M4c
 
+
+l1v4-18:
+  hosts:
+    10.3.3.228:
+      ansible_user: xen
+      ansible_become_pass: x3n123
 
 xen3:
   hosts:

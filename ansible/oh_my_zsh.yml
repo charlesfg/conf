@@ -2,6 +2,11 @@
 - name: Setup and configure Zsh and Oh My Zsh
   hosts: all
   tasks:
+    - name: Gather the package facts
+      become: true
+      ansible.builtin.package_facts:
+        manager: auto
+
     - name: Install required packages
       become: true
       ansible.builtin.package:
@@ -11,12 +16,27 @@
         - git
         - zsh
         - curl
-        - exa
         - fd-find
         - ripgrep
-        - bat
-        - zoxide
-        - fzf
+
+    - name: Loop through package list and ensure installation if they exist
+      become: true
+      ansible.builtin.package:
+        name: "{{ item }}" 
+        state: present
+      loop: "{{ packages_to_install }}"
+      when: item in ansible_facts.packages
+      vars:
+        packages_to_install:  # Define your list of packages here
+         - python-dev
+         - python3-dev
+         - python-pip
+         - python3-pip
+         - bat
+         - zoxide
+         - fzf
+         - exa
+
 
     - name: Create link fd to fdfind in Debian
       become: true
@@ -33,6 +53,7 @@
         dest: '/usr/bin/bat'
         state: link
       when: ansible_os_family == 'Debian' and ansible_distribution_version is version('23.04', '<')
+      ignore_errors: true
 
     - name: Install Oh My Zsh # noqa: latest
       ansible.builtin.git:
