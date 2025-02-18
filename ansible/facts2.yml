@@ -1,0 +1,25 @@
+---
+- name: Gather package facts
+  hosts: all
+  become: yes  # Required for package information
+  tasks:
+    - name: Get package facts
+      ansible.builtin.package_facts:
+        manager: auto
+      
+- name: Ensure required packages are installed
+  hosts: all
+  become: yes
+  tasks:
+    - name: Loop through package list and ensure installation
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages_to_install }}"
+      when: item in 
+
+  vars:
+    packages_to_install:  # Define your list of packages here
+      - python-dev
+      - python3-dev
+      - package3

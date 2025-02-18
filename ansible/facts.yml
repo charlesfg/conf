@@ -1,0 +1,17 @@
+---
+- name: Initial server setup
+  hosts: all
+  become: true
+  tasks:
+  - name: Gather the package facts
+    ansible.builtin.package_facts:
+      manager: auto
+
+  - name: Print the package facts
+    ansible.builtin.debug:
+      var: ansible_facts.packages
+
+  - name: Check whether a package called 'zstd' is installed
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts.packages['zstd'] | length }} versions of 'zstd' are installed!"
+    when: "'zstd' in ansible_facts.packages"

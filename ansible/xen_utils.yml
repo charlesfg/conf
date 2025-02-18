@@ -1,0 +1,163 @@
+---
+- name: Setup and configure Xen on a host
+  hosts: all
+  tasks:
+    - name: Gather the package facts
+      become: true
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Install required packages
+      become: true
+      ignore_errors: true
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - git
+        - zsh
+        - curl
+        - fd-find
+        - ripgrep
+        - python-dev
+        - python3-dev
+        - python-pip
+        - python3-pip
+        - bat
+        - zoxide
+        - fzf
+        - exa
+        - build-essential
+        - bcc
+        - bin86
+        - gawk
+        - bridge-utils
+        - iproute2
+        - libcurl4
+        - libcurl4-openssl-dev
+        - bzip2
+        - kmod
+        - fig2dev
+        - tgif
+        - texinfo
+        - texlive-latex-base
+        - texlive-latex-recommended
+        - texlive-fonts-extra
+        - texlive-fonts-recommended
+        - libpci-dev
+        - mercurial
+        - python3-dev
+        - python2-dev
+        - python2
+        - python3
+        - libsdl1.2-dev
+        - cmake
+        - make
+        - cc
+        - libc6-dev
+        - zlib1g-dev
+        - python
+        - python-dev
+        - python-twisted
+        - libncurses5-dev
+        - patch
+        - libvncserver-dev
+        - libsdl-dev
+        - libjpeg-dev
+        - libnl-route-3-200
+        - libnl-3-dev
+        - libnl-cli-3-dev
+        - libnl-genl-3-dev
+        - libnl-route-3-dev
+        - iasl
+        - libbz2-dev
+        - e2fslibs-dev
+        - git-core
+        - uuid-dev
+        - ocaml
+        - ocaml-findlib
+        - libx11-dev
+        - bison
+        - flex
+        - xz-utils
+        - libyajl-dev
+        - gettext
+        - libpixman-1-dev
+        - libaio-dev
+        - markdown
+        - pandoc
+        - libc6-dev-i386
+        - lzma
+        - lzma-dev
+        - liblzma-dev
+        - libsystemd-dev
+        - ninja-build
+        - liburing-dev
+        - libnfs-dev
+        - libseccomp-dev
+        - libcap-ng-dev
+        - librust-xkbcommon-dev
+        - libslirp-dev
+        - libvdeplug-dev
+        - vlevel
+        - libspice-protocol-dev
+        - libiscsi-dev
+        - resource-agents-extra
+        - libbrlapi-dev
+        - libssh-dev
+        - libgtk-3-0
+        - libepoxy-dev
+        - libepoxy-dev
+        - libsrt-gnutls-dev
+        - libgcrypt20-dev
+        - nettle-dev
+        - libjpeg-dev
+        - fuse3
+        - libfuse3-dev
+        - libnuma-dev
+
+    # - name: Loop through package list and ensure installation if they exist
+    #   become: true
+    #   ansible.builtin.package:
+    #     name: "{{ item }}"
+    #     state: present
+    #   loop: "{{ packages_to_install }}"
+    #   when: item in ansible_facts.packages
+    #   vars:
+    #     packages_to_install: # Define your list of packages here
+
+
+    - name: Create /opt/xen directory (if missing)
+      become: true
+      ansible.builtin.file:
+        path: /opt/xen
+        state: directory
+        owner: xen
+        group: xen
+        mode: 0755  # Optional: Set directory permissions (default: 0750)
+
+    - name: Clone the xen repo # noqa: latest
+      ansible.builtin.git:
+        repo: git@github.com:charlesfg/xen.git
+        dest: /opt/xen/src
+        accept_hostkey: yes
+        version: stable-4.18
+        depth: 1
+
+    - name: Clone the xen-utils repo # noqa: latest
+      ansible.builtin.git:
+        repo: git@github.com:charlesfg/xen-utils.git
+        dest: /opt/xen/xen-utils
+        accept_hostkey: yes
+        depth: 1
+
+    - name:  Enable IP forwarding
+      become: true
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: '1'
+        sysctl_set: true
+        state: present
+        reload: true
+

@@ -98,3 +98,26 @@ alias vl='sudo virsh list --all'
 # Utils
 alias topcpu='ps -eo pid,ppid,%cpu,%mem,cmd --sort=-%cpu | head -15'
 alias topmem='ps -eo pid,ppid,%cpu,%mem,cmd --sort=-%mem | head -15'
+
+# Function to compile and run C files
+crun() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: crun <filename.c>"
+        return 1
+    fi
+
+    local filename="$1"
+    local output="${filename%.*}"  # Remove .c extension
+
+    gcc -Wall -g -Werror "$filename" -o "$output" && ./"$output"
+}
+
+# Check which shell is running and set up the alias/function accordingly
+if [ -n "$BASH_VERSION" ]; then
+    alias crun='crun'
+elif [ -n "$ZSH_VERSION" ]; then
+    #autoload -Uz compinit && compinit
+    alias crun='noglob crun'
+fi
+
+

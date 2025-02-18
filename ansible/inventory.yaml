@@ -28,6 +28,7 @@ xen5:
   hosts:
     cfgxen5.dei.uc.pt:
       ansible_user: xen
+      ansible_become_pass: cfg@X3n
 
 xenservers:
   children:

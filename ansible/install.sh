@@ -14,4 +14,4 @@ if [[ "$OS" == "Linux" ]]; then
 elif [[ "$OS" == "Mac" ]]; then
   # Run Mac specific script
   brew install ansible
-fi
+fi  
