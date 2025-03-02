@@ -23,6 +23,7 @@ git config --global pull.rebase true
 # Setting cache for credentials
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=900000'
+git config --global http.postBuffer 524288000
 git config --global core.editor "vim"
 
 
